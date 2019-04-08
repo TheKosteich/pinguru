@@ -5,6 +5,8 @@ import authapp.views as authapp
 app_name = 'authapp'
 
 urlpatterns = [
-    re_path('^login/$', authapp.login, name='login'),
-    re_path('^logout/$', authapp.logout, name='logout'),
+    re_path('login/', authapp.login, name='login'),
+    re_path('logout/', authapp.logout, name='logout'),
+    re_path('register/', authapp.register, name='register'),
+    re_path('edit/', authapp.edit, name='edit'),
 ]

@@ -1,2 +1,10 @@
 .idea
+mainapp/migrations/
+authapp/migrations/
 *.pyc
+*.log
+db.sqlite3
+
+# Exclude from ignore list
+!mainapp/migrations/__init__.py
+!authapp/migrations/__init__.py
