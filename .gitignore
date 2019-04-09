@@ -1,3 +1,4 @@
+media/users_avatars/*
 .idea
 mainapp/migrations/
 authapp/migrations/
