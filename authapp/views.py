@@ -5,9 +5,9 @@ from django.urls import reverse
 
 
 def login(request):
-    title = 'вход'
+    title = 'Pinguru - Login'
 
-    login_form = CustomUserLoginForm(data=request.POST)
+    login_form = CustomUserLoginForm(data=request.POST or None)
     if request.method == 'POST' and login_form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
