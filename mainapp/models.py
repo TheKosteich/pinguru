@@ -6,11 +6,17 @@ class Domains(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 # Location table
 class Locations(models.Model):
     codename = models.CharField(verbose_name='Location code name', max_length=50, unique=True)
     description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.codename
 
 
 # IP Address table - main table
