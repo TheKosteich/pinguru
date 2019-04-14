@@ -26,7 +26,7 @@ class Addresses(models.Model):
     address = models.GenericIPAddressField()
     netmask = models.GenericIPAddressField()
     subnet = models.GenericIPAddressField()
-    mac = models.CharField(max_length=17, unique=True)
+    mac = models.CharField(max_length=17, unique=True, blank=True)
     gate = models.GenericIPAddressField()
     vlan = models.PositiveSmallIntegerField()
     location = models.ForeignKey(Locations, on_delete=models.CASCADE)
@@ -34,6 +34,11 @@ class Addresses(models.Model):
     sys_type = models.CharField(max_length=100)
     responsible = models.CharField(max_length=100)
     notes = models.TextField(null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Addresses'
+        verbose_name = 'Address'
+        ordering = ['address']
 
     def __str__(self):
         return self.address
