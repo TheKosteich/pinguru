@@ -1,4 +1,4 @@
-from django.urls import re_path, path
+from django.urls import path
 from mainapp.views import address
 
 # Required for Django 2.0 an above
