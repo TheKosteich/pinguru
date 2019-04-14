@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Domain table
@@ -42,3 +43,6 @@ class Addresses(models.Model):
 
     def __str__(self):
         return self.address
+
+    def get_absolute_url(self):
+        return reverse('mainapp:address', kwargs={'pk': self.pk})

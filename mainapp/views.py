@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, get_object_or_404
 from .models import Addresses
+from django.views.generic.edit import UpdateView
 
 
 # Create your views here.
@@ -21,3 +22,9 @@ def address(request, pk=None):
         return render(request, 'mainapp/address.html', context)
     else:
         return HttpResponseRedirect(reverse('main'))
+
+
+class AddressUpdate(UpdateView):
+    model = Addresses
+    fields = '__all__'
+    template_name = 'mainapp/address.html'
