@@ -28,3 +28,7 @@ class AddressUpdate(UpdateView):
     model = Addresses
     fields = '__all__'
     template_name = 'mainapp/address.html'
+
+    # def get_object(self):
+    #     pk = self.kwargs.get('pk')
+    #     return get_object_or_404(Addresses, pk=pk)
