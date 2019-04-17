@@ -20,20 +20,30 @@ class Locations(models.Model):
         return self.codename
 
 
+# Networks table
+class Networks(models.Model):
+    subnet = models.GenericIPAddressField()
+    netmask = models.GenericIPAddressField()
+    gateway = models.GenericIPAddressField()
+    vlan = models.PositiveSmallIntegerField()
+    service = models.CharField(max_length=100)
+    location = models.ManyToManyField(Locations)
+
+
 # IP Address table - main table
 class Addresses(models.Model):
-    hostname = models.CharField(max_length=50)
-    domain = models.ForeignKey(Domains, on_delete=models.CASCADE)
-    address = models.GenericIPAddressField()
-    netmask = models.GenericIPAddressField()
-    subnet = models.GenericIPAddressField()
-    mac = models.CharField(max_length=17, unique=True, blank=True)
-    gate = models.GenericIPAddressField()
-    vlan = models.PositiveSmallIntegerField()
-    location = models.ForeignKey(Locations, on_delete=models.CASCADE)
-    service = models.CharField(max_length=200)
-    sys_type = models.CharField(max_length=100)
-    responsible = models.CharField(max_length=100)
+    address = models.GenericIPAddressField(unique=True, blank=False)
+    hostname = models.CharField(max_length=50, blank=True)
+    domain = models.ForeignKey(Domains, on_delete=models.PROTECT, null=True, blank=True)
+    netmask = models.GenericIPAddressField(null=True, blank=True)
+    subnet = models.GenericIPAddressField(null=True, blank=True)
+    gate = models.GenericIPAddressField(null=True, blank=True)
+    vlan = models.PositiveSmallIntegerField(null=True, blank=True)
+    mac = models.CharField(max_length=17, blank=True)
+    location = models.ForeignKey(Locations, on_delete=models.PROTECT, null=True, blank=True)
+    service = models.CharField(max_length=200, blank=True)
+    sys_type = models.CharField(max_length=100, blank=True)
+    responsible = models.CharField(max_length=100, blank=True)
     notes = models.TextField(null=True, blank=True)
 
     class Meta:

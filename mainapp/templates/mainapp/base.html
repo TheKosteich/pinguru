@@ -42,23 +42,25 @@
         </a>
 
         <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Addons
+        </div>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item active">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true" aria-controls="collapseTable">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+                <i class="fas fa-fw fa-filter"></i>
+                <span>Filters</span></a>
+            </a>
             <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Location</h6>
-                    <a class="collapse-item" href="#">SPb</a>
-                    <a class="collapse-item" href="#">MSK</a>
-                    <a class="collapse-item" href="#">VAR</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Custom filter:</h6>
-                    <a class="collapse-item" href="#">Name1</a>
-                    <a class="collapse-item" href="#">Name2</a>
+                    {% for location in locations %}
+                        <a class="collapse-item" href="{% url 'mainapp:location' location.codename %}">{{ location.codename }}</a>
+                    {% endfor %}
                 </div>
             </div>
         </li>

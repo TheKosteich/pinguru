@@ -3,15 +3,21 @@
 
 
 {% block content %}
-<form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ edit_form.as_p }}
-    <input class="form-control" type="submit" value="Save">
-</form>
-<button class="btn btn-round form-control last">
-        <a href="{% url 'main' %}" class="">
-            Home
-        </a>
-</button>
-<div class="user_avatar"><img src="/media/{{ user.avatar }}"></div>
+<!-- Outer Row -->
+<div class="row justify-content-center">
+
+    <div class="col-xl-9 col-lg-12 col-md-9">
+        <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <input class="form-control" type="submit" value="Save">
+        </form>
+        <button class="btn btn-round form-control last">
+                <a href="{% url 'main' %}" class="btn btn-primary">
+                    Home
+                </a>
+        </button>
+        <div class="user_avatar"><img src="/media/{{ user.avatar }}"></div>
+    </div>
+</div>
 {% endblock %}
