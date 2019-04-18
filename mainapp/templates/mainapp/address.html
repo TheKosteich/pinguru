@@ -9,9 +9,10 @@
     </div>
     <div class="card-body">
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
+<!--            TODO: Cerate best design( split form input to two column and create "horizontal input" for 'Service' an 'System type' fields -->
             {% csrf_token %}
             {{ form.as_p }}
-            <input class="form-control" type="submit" value="Save">
+            <input class="form-control col-md-6" type="submit" value="Save">
         </form>
     </div>
 </div>

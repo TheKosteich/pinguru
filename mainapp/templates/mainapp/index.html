@@ -35,8 +35,8 @@
                 {% for item in addresses %}
                 <tr>
                     <td><a href="{% url 'mainapp:address' item.pk %}">{{ item.address }}</a></td>
-                    <td>{{ item.netmask }}</td>
-                    <td>{{ item.gate }}</td>
+                    <td>{{ item.network.netmask }}</td>
+                    <td>{{ item.network.gateway }}</td>
                     <td>{{ item.hostname }}</td>
                     <td>{{ item.sys_type }}</td>
                     <td>{{ item.responsible }}</td>

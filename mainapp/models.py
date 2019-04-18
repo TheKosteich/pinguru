@@ -20,14 +20,37 @@ class Locations(models.Model):
         return self.codename
 
 
+# Services list
+class Service(models.Model):
+    name = models.CharField(max_length=200, unique=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 # Networks table
 class Networks(models.Model):
     subnet = models.GenericIPAddressField()
     netmask = models.GenericIPAddressField()
     gateway = models.GenericIPAddressField()
-    vlan = models.PositiveSmallIntegerField()
-    service = models.CharField(max_length=100)
+    vlan = models.PositiveSmallIntegerField(null=True, blank=True)
+    service = models.ManyToManyField(Service, blank=True)
     location = models.ManyToManyField(Locations)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        netmask = sum(bin(int(block)).count('1') for block in self.netmask.split('.'))
+        return f'{self.subnet}/{netmask}'
+
+
+# System type list
+class SystemType(models.Model):
+    type = models.CharField(max_length=100, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.type
 
 
 # IP Address table - main table
@@ -35,16 +58,13 @@ class Addresses(models.Model):
     address = models.GenericIPAddressField(unique=True, blank=False)
     hostname = models.CharField(max_length=50, blank=True)
     domain = models.ForeignKey(Domains, on_delete=models.PROTECT, null=True, blank=True)
-    netmask = models.GenericIPAddressField(null=True, blank=True)
-    subnet = models.GenericIPAddressField(null=True, blank=True)
-    gate = models.GenericIPAddressField(null=True, blank=True)
-    vlan = models.PositiveSmallIntegerField(null=True, blank=True)
+    network = models.ForeignKey(Networks, on_delete=models.PROTECT, null=True)
     mac = models.CharField(max_length=17, blank=True)
     location = models.ForeignKey(Locations, on_delete=models.PROTECT, null=True, blank=True)
-    service = models.CharField(max_length=200, blank=True)
-    sys_type = models.CharField(max_length=100, blank=True)
+    service = models.ManyToManyField(Service, blank=True)
+    system_type = models.ForeignKey(SystemType, on_delete=models.PROTECT, null=True, blank=True)
     responsible = models.CharField(max_length=100, blank=True)
-    notes = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'Addresses'

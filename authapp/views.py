@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, HttpResponseRedirect
 from authapp.forms import CustomUserLoginForm, CustomUserCreationForm, CustomUserEditForm
 from django.contrib import auth
@@ -5,20 +7,23 @@ from django.urls import reverse
 
 
 def login(request):
-    title = 'Pinguru - Login'
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('main'))
+    else:
+        title = 'Pinguru - Login'
 
-    login_form = CustomUserLoginForm(data=request.POST or None)
-    if request.method == 'POST' and login_form.is_valid():
-        username = request.POST['username']
-        password = request.POST['password']
+        login_form = CustomUserLoginForm(data=request.POST or None)
+        if request.method == 'POST' and login_form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
 
-        user = auth.authenticate(username=username, password=password)
-        if user and user.is_active:
-            auth.login(request, user)
-            return HttpResponseRedirect(reverse('main'))
+            user = auth.authenticate(username=username, password=password)
+            if user and user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect(reverse('main'))
 
-    content = {'title': title, 'login_form': login_form}
-    return render(request, 'authapp/login.html', content)
+        content = {'title': title, 'login_form': login_form}
+        return render(request, 'authapp/login.html', content)
 
 
 def logout(request):
@@ -26,6 +31,7 @@ def logout(request):
     return HttpResponseRedirect(reverse('main'))
 
 
+# TODO: create check registration with email
 def register(request):
     title = 'регистрация'
 
@@ -43,6 +49,7 @@ def register(request):
     return render(request, 'authapp/register.html', content)
 
 
+@login_required
 def edit(request):
     title = 'edit'
 
