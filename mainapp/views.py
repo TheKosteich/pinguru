@@ -17,13 +17,18 @@ def index(request):
 
 
 def address(request):
-        return HttpResponseRedirect(reverse('main'))
+    return HttpResponseRedirect(reverse('main'))
 
 
 class AddressUpdate(UpdateView):
     model = Addresses
     template_name = 'mainapp/address.html'
     form_class = AddressUpdateForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        return context
 
 
 # Filtering by location

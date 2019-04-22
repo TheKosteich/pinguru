@@ -5,14 +5,65 @@
 <!-- IP Addresses DataTales -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">IP Address - {{ form.address.value }}</h6>
+        <h6 class="m-0 font-weight-bold text-primary">IP Address - {{ addresses.address }}</h6>
     </div>
     <div class="card-body">
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
-<!--            TODO: Cerate best design( split form input to two column and create "horizontal input" for 'Service' an 'System type' fields -->
+<!--            TODO: Cerate best design( create "horizontal input" for 'Service' field-->
             {% csrf_token %}
-            {{ form.as_p }}
-            <input class="form-control col-md-6" type="submit" value="Save">
+            <div class="form-row">
+                <label for="id_hostname" class="col-sm-2 col-form-label">Hostname:</label>
+                <div class="form-group col-md-4">
+                    {{ form.hostname }}
+                </div>
+                <label for="id_domain" class="col-sm-2 col-form-label">Domain:</label>
+                <div class="form-group col-md-4">
+                    {{ form.domain }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_network" class="col-sm-2 col-form-label">Network:</label>
+                <div class="form-group col-md-4">
+                    {{ form.network }}
+                </div>
+                <label for="id_mac" class="col-sm-2 col-form-label">MAC:</label>
+                <div class="form-group col-md-4">
+                    {{ form.mac }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_location" class="col-sm-2 col-form-label">Location:</label>
+                <div class="form-group col-md-4">
+                    {{ form.location }}
+                </div>
+<!--                <label for="id_mac" class="col-sm-2 col-form-label">MAC:</label>-->
+<!--                <div class="form-group col-md-4">-->
+<!--                    {{ form.mac }}-->
+<!--                </div>-->
+            </div>
+            <div class="form-row">
+                <label for="id_service" class="col-sm-2 col-form-label">Service:</label>
+                <div class="form-group col-md-5">
+                    {{ form.service }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_system_type" class="col-sm-2 col-form-label">System type:</label>
+                <div class="form-group col-md-4">
+                    {{ form.system_type }}
+                </div>
+                <label for="id_responsible" class="col-sm-2 col-form-label">Responsible:</label>
+                <div class="form-group col-md-4">
+                    {{ form.responsible }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_description" class="col-sm-2 col-form-label">Description:</label>
+                <div class="form-group col-md-10">
+                    {{ form.description }}
+                </div>
+            </div>
+            <input class="form-control col-md-2" type="submit" value="Save">
         </form>
     </div>
 </div>
