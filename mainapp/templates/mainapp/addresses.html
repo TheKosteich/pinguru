@@ -1,0 +1,51 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- IP Addresses DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">IP DataTable</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Network</th>
+                    <th>Gateway</th>
+                    <th>Hostname</th>
+                    <th>Service</th>
+                    <th>Responsible</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Network</th>
+                    <th>Gateway</th>
+                    <th>Hostname</th>
+                    <th>Service</th>
+                    <th>Responsible</th>
+                </tr>
+                </tfoot>
+                <tbody>
+
+                {% for item in addresses %}
+                <tr>
+                    <td><a href="{{ item.get_absolute_url }}">{{ item.address }}</a></td>
+                    <td>{{ item.network.netmask }}</td>
+                    <td>{{ item.network.gateway }}</td>
+                    <td>{{ item.hostname }}</td>
+                    <td>{{ item.system_type }}</td>
+                    <td>{{ item.responsible }}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

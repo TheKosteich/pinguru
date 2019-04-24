@@ -19,7 +19,7 @@ def addresses(request):
         context = {'locations': locations, 'addresses': addresses}
         return render(request, 'mainapp/addresses.html', context)
     else:
-        return redirect('auth/login/')
+        return redirect('auth.login')
 
 
 def address(request):
@@ -48,6 +48,6 @@ def location(request, location):
             context = {'locations': locations, 'addresses': addresses}
             return render(request, 'mainapp/addresses.html', context)
         else:
-            return redirect('main')
+            return redirect('mainapp:index')
     else:
         return redirect('auth:login')
