@@ -12,37 +12,49 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>IP Address</th>
+                    <th>Location</th>
                     <th>Network</th>
+                    <th>Subnet</th>
                     <th>Gateway</th>
-                    <th>Hostname</th>
+                    <th>VLAN</th>
                     <th>Service</th>
-                    <th>Responsible</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>IP Address</th>
+                    <th>Location</th>
                     <th>Network</th>
+                    <th>Subnet</th>
                     <th>Gateway</th>
-                    <th>Hostname</th>
+                    <th>VLAN</th>
                     <th>Service</th>
-                    <th>Responsible</th>
                 </tr>
                 </tfoot>
                 <tbody>
+                    {% regroup subnets by network as subnets_by_network %}
+                    {% for group in subnets_by_network %}
+                        {% for item in group.list %}
+                            <tr>
+                                {% if forloop.first %}
+                                    <td rowspan="{{ group.list|length }}"> {{ item.network.location.description }}</td>
+                                    <td rowspan="{{ group.list|length }}"> {{ item.network }} </td>
+                                {% endif %}
+                                <!-- subnet-->
+                                <td>{{ item.subnet }}</td>
+                                <!-- gateways-->
+                                <td>{{ item.gateway }}</td>
+                                <!-- VLAN-->
+                                <td>{{ item.vlan }}</td>
+                                <!-- services-->
+                                <td>
+                                    {% for service in item.service.all %}
+                                        <p>{{ service.name }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
 
-                {% for item in addresses %}
-                <tr>
-                    <td><a href="{% url 'mainapp:address' item.pk %}">{{ item.address }}</a></td>
-                    <td>{{ item.network.netmask }}</td>
-                    <td>{{ item.network.gateway }}</td>
-                    <td>{{ item.hostname }}</td>
-                    <td>{{ item.sys_type }}</td>
-                    <td>{{ item.responsible }}</td>
-                </tr>
-                {% endfor %}
-
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

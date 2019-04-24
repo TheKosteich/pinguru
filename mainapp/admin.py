@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Domains, Locations, Addresses, SystemType, Service, Networks
+from .models import Domains, Locations, Addresses, SystemType, Service, Subnets, Networks
 
 
 # Register your models here.
@@ -15,14 +15,15 @@ class ServiceAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description')
 
 
-class NetworksAdmin(admin.ModelAdmin):
-    filter_horizontal = ('service', 'location',)
+class SubnetsAdmin(admin.ModelAdmin):
+    filter_horizontal = ('service',)
     search_fields = ('subnet',)
 
 
 admin.site.register(Addresses, AddressesAdmin)
-admin.site.register(Networks, NetworksAdmin)
+admin.site.register(Subnets, SubnetsAdmin)
 admin.site.register(Domains)
 admin.site.register(Locations)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(SystemType)
+admin.site.register(Networks)
