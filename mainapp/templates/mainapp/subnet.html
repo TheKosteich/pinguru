@@ -1,0 +1,55 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- IP Addresses DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">IP Subnet - {{ subnets.subnet }}</h6>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <label for="id_network" class="col-sm-2 col-form-label">Network:</label>
+                <div class="form-group col-md-4">
+                    {{ form.network }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_subnet" class="col-sm-2 col-form-label">Subnet:</label>
+                <div class="form-group col-md-4">
+                    {{ form.subnet }}
+                </div>
+                <label for="id_netmask" class="col-sm-2 col-form-label">Netmask:</label>
+                <div class="form-group col-md-4">
+                    {{ form.netmask }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_gateway" class="col-sm-2 col-form-label">Gateway:</label>
+                <div class="form-group col-md-4">
+                    {{ form.gateway }}
+                </div>
+                <label for="id_vlan" class="col-sm-2 col-form-label">VLAN:</label>
+                <div class="form-group col-md-4">
+                    {{ form.vlan }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_service" class="col-sm-2 col-form-label">Service:</label>
+                <div class="form-group col-md-5">
+                    {{ form.service }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_description" class="col-sm-2 col-form-label">Description:</label>
+                <div class="form-group col-md-10">
+                    {{ form.description }}
+                </div>
+            </div>
+            <input class="form-control col-md-2" type="submit" value="Save">
+        </form>
+    </div>
+</div>
+{% endblock %}

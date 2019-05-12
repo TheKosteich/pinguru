@@ -1,0 +1,32 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- IP Addresses DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Domain - {{ domains.name }}</h6>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <label for="id_hostname" class="col-sm-12 col-form-label">Domain name:</label>
+                <div class="form-group col-md-4">
+                    {{ form.name }}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="id_domain" class="col-sm-12 col-form-label">Description:</label>
+                <div class="form-group col-md-4">
+                    {{ form.description }}
+                </div>
+            </div>
+<!--            <button type="button" class="btn btn-danger">Delete</button>-->
+            <a class="btn btn-danger" href="{% url 'domain_delete' form.pk %}">Delete</a>
+            <button class="btn btn-success" type="submit">Save</button>
+<!--            <input class="form-control btn btn-success col-md-2" type="submit" value="Save">-->
+        </form>
+    </div>
+</div>
+{% endblock %}

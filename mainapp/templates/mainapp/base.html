@@ -55,7 +55,7 @@
         <!-- Nav Item - Tables -->
         <li class="nav-item active">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true" aria-controls="collapseTable">
-                <i class="fas fa-fw fa-network-wired"></i>
+                <i class="fas fa-fw fa-filter"></i>
                 <span>IP Addresses</span></a>
             </a>
             <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
@@ -95,6 +95,50 @@
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - PKI Infrastructure -->
+                    <li class="nav-item mx-1">
+                      <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                        <i class="fab fa-keycdn fa-fw"></i>
+                      </a>
+                    </li>
+
+                    <!-- Nav Item - Domains -->
+                    <li class="nav-item mx-1">
+                      <a class="nav-link" href="{% url 'domains_list' %}" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-at fa-fw"></i>
+                      </a>
+                    </li>
+
+                    <!-- Nav Item - Locations -->
+                    <li class="nav-item mx-1">
+                      <a class="nav-link" href="{% url 'locations' %}" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-map-marked-alt fa-fw"></i>
+                      </a>
+                    </li>
+
+                    <!-- Nav Item - Subnets -->
+                    <li class="nav-item mx-1">
+                      <a class="nav-link" href="{% url 'main' %}" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-network-wired fa-fw"></i>
+                      </a>
+                    </li>
+
+                    <!-- Nav Item - IP Addresses -->
+                    <li class="nav-item mx-1">
+                      <a class="nav-link" href="{% url 'mainapp:index' %}" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ethernet fa-fw"></i>
+                      </a>
+                    </li>
+
+<!--                    <div class="topbar-divider d-none d-sm-block"></div>-->
+
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="{% url 'mainapp:index' %}" role="button">-->
+<!--                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">IP Addresses</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->

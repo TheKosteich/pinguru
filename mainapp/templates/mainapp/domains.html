@@ -1,0 +1,40 @@
+{% extends 'mainapp/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<!-- IP Addresses DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Domains list</h6>
+        <a class="btn btn-success" href="{% url 'domain_add' %}">Add</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Domain name</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>Domain name</th>
+                    <th>Description</th>
+                </tr>
+                </tfoot>
+                <tbody>
+
+                {% for item in object_list %}
+                <tr>
+                    <td><a href="{{ item.get_absolute_url }}">{{ item.name }}</a></td>
+                    <td>{{ item.description }}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

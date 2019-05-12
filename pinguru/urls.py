@@ -24,7 +24,16 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainapp.index, name='main'),
+    path('domain/<int:pk>/', mainapp.DomainUpdate.as_view(), name='domain'),
+    path('domain/delete/<int:pk>/', mainapp.DomainDelete.as_view(), name='domain_delete'),
+    path('domain/add/', mainapp.DomainCreate.as_view(), name='domain_add'),
+    path('domains/', mainapp.DomainsList.as_view(), name='domains_list'),
+    path('locations/', mainapp.LocationsList.as_view(), name='locations'),
+    # path('services/', mainapp.ServicesList.as_view(), name='services'),
+    # path('system-types/', mainapp.SystemTypesList.as_view(), name='system-types'),
     path('address/', include('mainapp.urls', namespace='mainapp')),
+    path('subnet/<int:pk>/', mainapp.SubnetUpdate.as_view(), name='subnet'),
+    path('subnet/<int:pk>/populate', mainapp.subnet_populate, name='subnet_populate'),
     path('auth/', include('authapp.urls', namespace='auth')),
 ]
 

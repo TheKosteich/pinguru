@@ -5,7 +5,7 @@
 <!-- IP Addresses DataTales -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">IP DataTable</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Subnets</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -40,7 +40,7 @@
                                     <td rowspan="{{ group.list|length }}"> {{ item.network }} </td>
                                 {% endif %}
                                 <!-- subnet-->
-                                <td>{{ item.subnet }}</td>
+                                <td><a href="{{ item.get_absolute_url }}">{{ item.subnet }}</a></td>
                                 <!-- gateways-->
                                 <td>{{ item.gateway }}</td>
                                 <!-- VLAN-->

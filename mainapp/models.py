@@ -15,6 +15,9 @@ class Domains(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('domain', kwargs={'pk': self.pk})
+
 
 # Location table
 class Locations(models.Model):
@@ -79,6 +82,9 @@ class Subnets(models.Model):
     def __str__(self):
         netmask = sum(bin(int(block)).count('1') for block in self.netmask.split('.'))
         return f'{self.subnet}/{netmask}'
+
+    def get_absolute_url(self):
+        return reverse('subnet', kwargs={'pk': self.pk})
 
 
 # System type list
