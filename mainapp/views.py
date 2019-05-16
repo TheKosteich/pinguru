@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.views.generic.list import ListView
 
 from mainapp.models import Domains, Addresses, Locations, Subnets, Networks
 from mainapp.forms import AddressUpdateForm, SubnetUpdateForm, DomainUpdateForm
-from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from django.views.generic.list import ListView
 from netaddr import IPNetwork, IPAddress
 
 
@@ -28,8 +28,6 @@ class AddressesList(ListView):
 
 
 # --- Work with domains --->
-
-
 # Out domains list
 class DomainsList(ListView):
     model = Domains
@@ -75,13 +73,10 @@ class DomainDelete(DeleteView):
         context = super().get_context_data(**kwargs)
         context['locations'] = Locations.objects.all()
         return context
-
-
 # <--- End Work with domains ---
 
 
 # --- Work with locations --->
-
 # Out locations list
 class LocationsList(ListView):
     model = Locations
@@ -103,12 +98,10 @@ class LocationDelete(DeleteView):
 
 class LocationAdd(CreateView):
     pass
-
 # <--- End Work with locations ---
 
+
 # --- Work with subnets --->
-
-
 class SubnetUpdate(UpdateView):
     model = Subnets
     template_name = 'mainapp/subnet.html'
@@ -121,13 +114,7 @@ class SubnetDelete(DeleteView):
 
 class SubnetAdd(CreateView):
     pass
-
 # <--- End Work with Subnets ---
-
-
-
-def address(request):
-    return HttpResponseRedirect(reverse('main'))
 
 
 class AddressUpdate(UpdateView):
@@ -142,6 +129,7 @@ class AddressUpdate(UpdateView):
 
 
 # Filtering by location
+# TODO: Function don't work. Make this feature by Class View
 def location(request, location):
     if request.user.is_authenticated:
         locations = Locations.objects.all()
@@ -158,6 +146,7 @@ def location(request, location):
 
 
 # Populating subnet by IP's
+# TODO: Include this feature to SubnetAdd Class View
 def subnet_populate(request, pk):
     db_subnet = get_object_or_404(Subnets, pk=pk)
     subnet = IPNetwork(str(db_subnet))

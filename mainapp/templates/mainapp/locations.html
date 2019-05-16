@@ -26,7 +26,7 @@
 
                 {% for item in object_list %}
                 <tr>
-                    <td><a href="#">{{ item.codename }}</a></td>
+                    <td><a href="{{ item.get_absolute_url }}">{{ item.codename }}</a></td>
                     <td>{{ item.description }}</td>
                 </tr>
                 {% endfor %}
