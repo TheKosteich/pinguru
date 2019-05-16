@@ -18,6 +18,9 @@ class Domains(models.Model):
     def get_absolute_url(self):
         return reverse('domain', kwargs={'pk': self.pk})
 
+    def get_delete_url(self):
+        return reverse('domain_delete', kwargs={'pk': self.pk})
+
 
 # Location table
 class Locations(models.Model):
@@ -31,6 +34,12 @@ class Locations(models.Model):
 
     def __str__(self):
         return self.codename
+
+    def get_absolute_url(self):
+        return reverse('location', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('location_delete', kwargs={'pk': self.pk})
 
 
 # Services list
@@ -85,6 +94,9 @@ class Subnets(models.Model):
 
     def get_absolute_url(self):
         return reverse('subnet', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('subnet_delete', kwargs={'pk': self.pk})
 
 
 # System type list

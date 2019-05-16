@@ -23,7 +23,7 @@
                 </div>
             </div>
 <!--            <button type="button" class="btn btn-danger">Delete</button>-->
-            <a class="btn btn-danger" href="{% url 'domain_delete' form.pk %}">Delete</a>
+            <a class="btn btn-danger" href="{{ domains.get_delete_url }}">Delete</a>
             <button class="btn btn-success" type="submit">Save</button>
 <!--            <input class="form-control btn btn-success col-md-2" type="submit" value="Save">-->
         </form>

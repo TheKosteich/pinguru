@@ -24,16 +24,30 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainapp.index, name='main'),
+
+    # --- Domain URLs --->
     path('domain/<int:pk>/', mainapp.DomainUpdate.as_view(), name='domain'),
-    path('domain/delete/<int:pk>/', mainapp.DomainDelete.as_view(), name='domain_delete'),
+    path('domain/<int:pk>/delete/', mainapp.DomainDelete.as_view(), name='domain_delete'),
     path('domain/add/', mainapp.DomainCreate.as_view(), name='domain_add'),
     path('domains/', mainapp.DomainsList.as_view(), name='domains_list'),
+    # <--- End Domain URLs ---
+
+    # --- Location URLs --->
+    path('location/<int:pk>/', mainapp.LocationUpdate.as_view(), name='location'),
+    path('location/<int:pk>/delete/', mainapp.LocationDelete.as_view(), name='location_delete'),
+    path('location/add/', mainapp.LocationAdd.as_view(), name='location_add'),
     path('locations/', mainapp.LocationsList.as_view(), name='locations'),
+    # <--- End Location URLs ---
+
+    # --- Subnet URLs --->
+    path('subnet/<int:pk>/', mainapp.SubnetUpdate.as_view(), name='subnet'),
+    path('subnet/<int:pk>/delete/', mainapp.SubnetDelete.as_view(), name='subnet'),
+    path('subnet/add/', mainapp.SubnetAdd.as_view(), name='subnet'),
+    # <--- End Subnet URLS ---
+
     # path('services/', mainapp.ServicesList.as_view(), name='services'),
     # path('system-types/', mainapp.SystemTypesList.as_view(), name='system-types'),
     path('address/', include('mainapp.urls', namespace='mainapp')),
-    path('subnet/<int:pk>/', mainapp.SubnetUpdate.as_view(), name='subnet'),
-    path('subnet/<int:pk>/populate', mainapp.subnet_populate, name='subnet_populate'),
     path('auth/', include('authapp.urls', namespace='auth')),
 ]
 

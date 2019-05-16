@@ -47,6 +47,7 @@ class DomainCreate(CreateView):
     # fields = '__all__'
     form_class = DomainUpdateForm
     template_name = 'mainapp/domain-add.html'
+    success_url = reverse_lazy('domains_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,14 +67,9 @@ class DomainUpdate(UpdateView):
         return context
 
 
-# TODO: Domain delete view - not ready yet!!!!
 class DomainDelete(DeleteView):
     model = Domains
     success_url = reverse_lazy('domains_list')
-
-    # def get_object(self, queryset=None):
-    #     pk_ = self.kwargs.get('pk')
-    #     return get_object_or_404(Domains, pk=pk_)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -97,7 +93,38 @@ class LocationsList(ListView):
         return context
 
 
+class LocationUpdate(UpdateView):
+    pass
+
+
+class LocationDelete(DeleteView):
+    pass
+
+
+class LocationAdd(CreateView):
+    pass
+
 # <--- End Work with locations ---
+
+# --- Work with subnets --->
+
+
+class SubnetUpdate(UpdateView):
+    model = Subnets
+    template_name = 'mainapp/subnet.html'
+    form_class = SubnetUpdateForm
+
+
+class SubnetDelete(DeleteView):
+    pass
+
+
+class SubnetAdd(CreateView):
+    pass
+
+# <--- End Work with Subnets ---
+
+
 
 def address(request):
     return HttpResponseRedirect(reverse('main'))
@@ -112,13 +139,6 @@ class AddressUpdate(UpdateView):
         context = super().get_context_data(**kwargs)
         context['locations'] = Locations.objects.all()
         return context
-
-
-# Class for work with subnets update form
-class SubnetUpdate(UpdateView):
-    model = Subnets
-    template_name = 'mainapp/subnet.html'
-    form_class = SubnetUpdateForm
 
 
 # Filtering by location
