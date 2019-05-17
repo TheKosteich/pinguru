@@ -5,7 +5,7 @@
 <!-- IP Addresses DataTales -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Subnet - {{ subnets.subnet }}</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Create new subnet</h6>
     </div>
     <div class="card-body">
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -48,7 +48,7 @@
                     {{ form.description }}
                 </div>
             </div>
-            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete</a>
+            <a class="btn btn-warning" href="{% url 'main' %}">Cancel</a>
             <button class="btn btn-success" type="submit">Save</button>
         </form>
     </div>

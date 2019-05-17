@@ -4,7 +4,7 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.views.generic.list import ListView
 
 from mainapp.models import Domains, Addresses, Locations, Subnets, Networks
-from mainapp.forms import AddressUpdateForm, SubnetUpdateForm, DomainUpdateForm
+from mainapp.forms import AddressUpdateForm, SubnetUpdateForm, DomainUpdateForm, LocationUpdateForm
 from netaddr import IPNetwork, IPAddress
 
 
@@ -42,7 +42,6 @@ class DomainsList(ListView):
 # Create domain item
 class DomainCreate(CreateView):
     model = Domains
-    # fields = '__all__'
     form_class = DomainUpdateForm
     template_name = 'mainapp/domain-add.html'
     success_url = reverse_lazy('domains_list')
@@ -89,15 +88,37 @@ class LocationsList(ListView):
 
 
 class LocationUpdate(UpdateView):
-    pass
+    model = Locations
+    template_name = 'mainapp/location.html'
+    form_class = LocationUpdateForm
+    success_url = reverse_lazy('locations_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        return context
 
 
 class LocationDelete(DeleteView):
-    pass
+    model = Locations
+    success_url = 'locations_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        return context
 
 
-class LocationAdd(CreateView):
-    pass
+class LocationCreate(CreateView):
+    model = Locations
+    form_class = LocationUpdateForm
+    template_name = 'mainapp/location-add.html'
+    success_url = reverse_lazy('locations')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        return context
 # <--- End Work with locations ---
 
 
@@ -106,14 +127,20 @@ class SubnetUpdate(UpdateView):
     model = Subnets
     template_name = 'mainapp/subnet.html'
     form_class = SubnetUpdateForm
+    success_url = reverse_lazy('main')
 
 
 class SubnetDelete(DeleteView):
-    pass
+    model = Subnets
+    success_url = reverse_lazy('main')
 
 
-class SubnetAdd(CreateView):
-    pass
+class SubnetCreate(CreateView):
+    model = Subnets
+    form_class = SubnetUpdateForm
+    success_url = reverse_lazy('main')
+    template_name = 'mainapp/subnet-add.html'
+
 # <--- End Work with Subnets ---
 
 

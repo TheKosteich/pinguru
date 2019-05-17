@@ -38,14 +38,14 @@ urlpatterns = [
     # --- Location URLs --->
     path('location/<int:pk>/', login_required(mainapp.LocationUpdate.as_view()), name='location'),
     path('location/<int:pk>/delete/', login_required(mainapp.LocationDelete.as_view()), name='location_delete'),
-    path('location/add/', login_required(mainapp.LocationAdd.as_view()), name='location_add'),
+    path('location/add/', login_required(mainapp.LocationCreate.as_view()), name='location_add'),
     path('locations/', login_required(mainapp.LocationsList.as_view()), name='locations'),
     # <--- End Location URLs ---
 
     # --- Subnet URLs --->
     path('subnet/<int:pk>/', login_required(mainapp.SubnetUpdate.as_view()), name='subnet'),
     path('subnet/<int:pk>/delete/', login_required(mainapp.SubnetDelete.as_view()), name='subnet_delete'),
-    path('subnet/add/', login_required(mainapp.SubnetAdd.as_view()), name='subnet_add'),
+    path('subnet/add/', login_required(mainapp.SubnetCreate.as_view()), name='subnet_add'),
     # <--- End Subnet URLS ---
 
     # path('services/', mainapp.ServicesList.as_view(), name='services'),

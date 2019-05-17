@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from mainapp.models import Addresses, Subnets, Domains
+from mainapp.models import Addresses, Subnets, Domains, Locations
 
 
 class AddressUpdateForm(ModelForm):
@@ -32,6 +32,19 @@ class SubnetUpdateForm(ModelForm):
 class DomainUpdateForm(ModelForm):
     class Meta:
         model = Domains
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control col-md-12'
+            field.help_text = ''
+
+
+# Form for location view and update
+class LocationUpdateForm(ModelForm):
+    class Meta:
+        model = Locations
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):
