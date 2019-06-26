@@ -104,10 +104,33 @@
                     </li>
 
                     <!-- Nav Item - Domains -->
-                    <li class="nav-item mx-1">
-                      <a class="nav-link" href="{% url 'domains_list' %}" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item dropdown no-arrow mx-1">
+                      <a class="nav-link dropdown-toggle" href="{% url 'domains_list' %}" id="alertDropdown"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-at fa-fw"></i>
                       </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">Domain management</h6>
+                            <a class="dropdown-item d-flex align-items-center" href="{% url 'domains_list' %}">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">List</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="{% url 'domain_add' %}">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Add</span>
+                                </div>
+                            </a>
+                        </div>
                     </li>
 
                     <!-- Nav Item - Locations -->

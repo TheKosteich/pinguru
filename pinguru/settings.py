@@ -125,3 +125,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/auth/login/'
+
+PASSWORD_RESET_TIMEOUT_DAYS = 1

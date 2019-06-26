@@ -45,6 +45,7 @@ urlpatterns = [
     # --- Subnet URLs --->
     path('subnet/<int:pk>/', login_required(mainapp.SubnetUpdate.as_view()), name='subnet'),
     path('subnet/<int:pk>/delete/', login_required(mainapp.SubnetDelete.as_view()), name='subnet_delete'),
+    path('subnet/<int:pk>/populate/', mainapp.subnet_populate, name='subnet_populate'),
     path('subnet/add/', login_required(mainapp.SubnetCreate.as_view()), name='subnet_add'),
     # <--- End Subnet URLS ---
 

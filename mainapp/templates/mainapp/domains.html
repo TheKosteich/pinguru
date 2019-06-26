@@ -5,11 +5,15 @@
 <!-- IP Addresses DataTales -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Domains list</h6>
-<!--        <a class="btn btn-success" href="{% url 'domain_add' %}">Add</a>-->
+        <a class="btn btn-success btn-sm" href="{% url 'domain_add' %}" style="float:right;">Add</a>
+        <h6 class="m-0 font-weight-bold text-primary">Domains</h6>
+
     </div>
     <div class="card-body">
-        <div class="table-responsive">
+<!--        <div class="table-responsive" style="position:relative;">-->
+<!--        <a class="btn btn-success btn-sm" href="{% url 'domain_add' %}" style="position:absolute; left:200px;">Add</a>-->
+        <div class="table-responsive" style="position:relative;">
+            <a class="btn btn-success btn-sm" href="{% url 'domain_add' %}" style="float:right;">Add</a>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
@@ -34,7 +38,7 @@
 
                 </tbody>
             </table>
-            <a class="btn btn-success" href="{% url 'domain_add' %}">Add</a>
+<!--            <a class="btn btn-success" href="{% url 'domain_add' %}">Add</a>-->
         </div>
     </div>
 </div>

@@ -16,15 +16,33 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
+# --- Work with addresses --->
 # Out IP Addresses list
 class AddressesList(ListView):
     model = Addresses
     template_name = 'mainapp/addresses.html'
+    # To use paginator in ClassView
+    # paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['locations'] = Locations.objects.all()
+        if self.kwargs and self.kwargs['location']:
+                context['object_list'] = Addresses.objects.filter(location__codename=self.kwargs['location'])
+        return context
+
+
+class AddressUpdate(UpdateView):
+    model = Addresses
+    template_name = 'mainapp/address.html'
+    form_class = AddressUpdateForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['locations'] = Locations.objects.all()
         return context
+
+# <--- End work with addresses ---
 
 
 # --- Work with domains --->
@@ -32,6 +50,8 @@ class AddressesList(ListView):
 class DomainsList(ListView):
     model = Domains
     template_name = 'mainapp/domains.html'
+    # To use paginator in ClassView
+    # paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -80,6 +100,8 @@ class DomainDelete(DeleteView):
 class LocationsList(ListView):
     model = Locations
     template_name = 'mainapp/locations.html'
+    # To use paginator in ClassView
+    # paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -141,43 +163,21 @@ class SubnetCreate(CreateView):
     success_url = reverse_lazy('main')
     template_name = 'mainapp/subnet-add.html'
 
-# <--- End Work with Subnets ---
-
-
-class AddressUpdate(UpdateView):
-    model = Addresses
-    template_name = 'mainapp/address.html'
-    form_class = AddressUpdateForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['locations'] = Locations.objects.all()
-        return context
-
-
-# Filtering by location
-# TODO: Function don't work. Make this feature by Class View
-def location(request, location):
-    if request.user.is_authenticated:
-        locations = Locations.objects.all()
-        addresses = Addresses.objects.filter(location__codename=location)
-
-        # Validating the string parameter "<str:location>" from URL
-        if addresses:
-            context = {'locations': locations, 'addresses': addresses}
-            return render(request, 'mainapp/addresses.html', context)
-        else:
-            return redirect('mainapp:index')
-    else:
-        return redirect('auth:login')
-
 
 # Populating subnet by IP's
-# TODO: Include this feature to SubnetAdd Class View
+# TODO: Include this feature to SubnetCreate Class View
 def subnet_populate(request, pk):
     db_subnet = get_object_or_404(Subnets, pk=pk)
     subnet = IPNetwork(str(db_subnet))
     for ip in subnet:
-        addr = Addresses(address=ip, subnet=db_subnet)
-        addr.save()
-    return render(request, 'mainapp/populated.html')
+        if ip != subnet.network and ip != subnet.broadcast:
+            try:
+                address = Addresses.objects.get(address=str(ip))
+                pass
+            except Addresses.DoesNotExist:
+                address = Addresses(address=str(ip), network=db_subnet)
+                address.save()
+    return redirect('/')
+
+
+# <--- End Work with Subnets ---

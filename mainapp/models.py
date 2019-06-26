@@ -98,6 +98,9 @@ class Subnets(models.Model):
     def get_delete_url(self):
         return reverse('subnet_delete', kwargs={'pk': self.pk})
 
+    def get_populate_url(self):
+        return reverse('subnet_populate', kwargs={'pk': self.pk})
+
 
 # System type list
 class SystemType(models.Model):
