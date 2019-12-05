@@ -113,7 +113,7 @@ class LocationUpdate(UpdateView):
     model = Locations
     template_name = 'mainapp/location.html'
     form_class = LocationUpdateForm
-    success_url = reverse_lazy('locations_list')
+    success_url = reverse_lazy('locations')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
